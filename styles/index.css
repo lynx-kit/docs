@@ -272,7 +272,7 @@ html:not(.dark) .rp-home-background::before {
 .rp-button.rp-button--big {
   min-width: 160px;
   height: 50px;
-  border-radius: 12px;
+  border-radius: 60px;
   font-size: 15px;
   font-weight: 600;
   box-shadow: none !important;
@@ -338,7 +338,7 @@ html:not(.dark) .rp-button.rp-button--brand {
 
 .lk-home-install__chip {
   padding: 5px 14px;
-  border-radius: 8px;
+  border-radius: 60px;
   border: 1px solid var(--rp-c-divider);
   background: transparent;
   color: var(--rp-c-text-2);
