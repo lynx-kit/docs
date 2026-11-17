@@ -31,7 +31,7 @@ jobs:
       - name: Build docs
         run: pnpm build
         env:
-          DOCS_BASE: /lynx-kit/
+          DOCS_BASE: /docs/
 
       - name: Deploy to GitHub Pages
         uses: peaceiris/actions-gh-pages@v4
