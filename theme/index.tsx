@@ -57,7 +57,7 @@ function HomeLayout() {
       const n = COMPONENTS.length;
       (brand as HTMLElement).innerHTML = `
         <a href="${__NPM_URL__}" target="_blank" rel="noreferrer">
-          Public Beta · ${n} ${n === 1 ? 'component' : 'components'}
+          Alpha Version · ${n} ${n === 1 ? 'component' : 'components'}
         </a>
       `;
     }
