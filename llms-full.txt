@@ -1,0 +1,1015 @@
+---
+url: /lynx-kit/guide/get-started/installation.md
+---
+
+> For AI agents: the complete documentation index is available at /lynx-kit/llms.txt, the full documentation bundle is available at /lynx-kit/llms-full.txt.
+
+# Installation
+
+Lynx Kit components are published to npm under the `@lynx-kit` scope. Each component is its own
+package, so you add only the ones you need.
+
+## Requirements
+
+- A Lynx app created with Rspeedy (`@lynx-js/rspeedy`) and ReactLynx (`@lynx-js/react`)
+- `@lynx-js/react` 0.100.0 or newer
+- `@lynx-js/types` 4 or newer
+- `@types/react` 19 or newer
+
+## Install the package
+
+
+```sh [npm]
+npm install @lynx-kit/modal
+```
+
+```sh [yarn]
+yarn add @lynx-kit/modal
+```
+
+```sh [pnpm]
+pnpm add @lynx-kit/modal
+```
+
+```sh [bun]
+bun add @lynx-kit/modal
+```
+
+```sh [deno]
+deno add npm:@lynx-kit/modal
+```
+
+## Compile the package source
+
+The package ships JSX (`.jsx` files) so that ReactLynx can compile it for the main thread and the
+background thread. Bundlers skip `node_modules` by default, so tell Rspeedy to include the package.
+Add a `source.include` entry to `lynx.config.ts`:
+
+```ts title="lynx.config.ts"
+import { defineConfig } from '@lynx-js/rspeedy';
+import { pluginQRCode } from '@lynx-js/qrcode-rsbuild-plugin';
+import { pluginReactLynx } from '@lynx-js/react-rsbuild-plugin';
+
+export default defineConfig({
+  source: {
+    include: [/@lynx-kit/],
+  },
+  plugins: [pluginQRCode(), pluginReactLynx()],
+});
+```
+
+Keep the plugins your project already has and only add the `source` block. Restart the dev server
+after editing the config.
+
+:::tip
+Without this entry you will see a JSX syntax error that points into
+`node_modules/@lynx-kit/modal`.
+:::
+
+## Tailwind is optional
+
+The modal ships its own precompiled CSS, so your app does not need Tailwind. If your app does use
+Tailwind, see [Styling and Theming](/lynx-kit/guide/styling.md) to learn how to combine them.
+
+## Next step
+
+Continue with the [Quick Start](/lynx-kit/guide/get-started/quick-start.md).
+
+
+
+---
+url: /lynx-kit/apis/index.md
+---
+
+> For AI agents: the complete documentation index is available at /lynx-kit/llms.txt, the full documentation bundle is available at /lynx-kit/llms-full.txt.
+
+# API overview
+
+## Components
+
+| Package           | Component                        | Description                                                                                     |
+| ----------------- | -------------------------------- | ----------------------------------------------------------------------------------------------- |
+| `@lynx-kit/modal` | [Modal](/lynx-kit/apis/modal.md) | A customizable, animated modal dialog with title, description, icon, custom content and actions |
+
+## Conventions
+
+These rules apply to every Lynx Kit component.
+
+| Convention | Details                                                                                                       |
+| ---------- | ------------------------------------------------------------------------------------------------------------- |
+| Controlled | State such as `visible` is owned by your code. Components call your callbacks and never change it themselves. |
+| Events     | Lynx event names are used: `bindtap` and `catchtap`, not `onClick`.                                           |
+| Colors     | Color props such as `accentColor` take any CSS color and are applied inline.                                  |
+| Classes    | `className` props extend the defaults. Library classes use the `lk-` prefix.                                  |
+| Types      | Every package ships `.d.ts` files and exports its props type, for example `ModalProps`.                       |
+
+
+
+---
+url: /lynx-kit/apis/modal.md
+---
+
+> For AI agents: the complete documentation index is available at /lynx-kit/llms.txt, the full documentation bundle is available at /lynx-kit/llms-full.txt.
+
+# Modal
+
+A customizable, animated modal dialog for Lynx apps. Package: `@lynx-kit/modal`.
+
+## Install
+
+
+```sh [npm]
+npm install @lynx-kit/modal
+```
+
+```sh [yarn]
+yarn add @lynx-kit/modal
+```
+
+```sh [pnpm]
+pnpm add @lynx-kit/modal
+```
+
+```sh [bun]
+bun add @lynx-kit/modal
+```
+
+```sh [deno]
+deno add npm:@lynx-kit/modal
+```
+
+Add the package to `source.include` in `lynx.config.ts`. See
+[Installation](/lynx-kit/guide/get-started/installation.md#compile-the-package-source).
+
+## Import
+
+```ts
+import { Modal } from '@lynx-kit/modal';
+import type { ModalProps } from '@lynx-kit/modal';
+```
+
+## Usage
+
+```tsx
+import { useState } from '@lynx-js/react';
+import { Modal } from '@lynx-kit/modal';
+
+export function Example() {
+  const [open, setOpen] = useState(false);
+
+  return (
+    <view>
+      <view bindtap={() => setOpen(true)}>
+        <text>Show modal</text>
+      </view>
+
+      <Modal
+        visible={open}
+        onClose={() => setOpen(false)}
+        title="Delete project?"
+        description="This action can't be undone."
+        confirmText="Delete"
+        accentColor="#ef4444"
+        onConfirm={() => setOpen(false)}
+      />
+    </view>
+  );
+}
+```
+
+## Props
+
+### Content
+
+| Prop          | Type        | Default | Description                                                               |
+| ------------- | ----------- | ------- | ------------------------------------------------------------------------- |
+| `title`       | `string`    | none    | Heading text, centered below the icon                                     |
+| `description` | `string`    | none    | Supporting text under the title                                           |
+| `icon`        | `ReactNode` | none    | Rendered inside a circular badge at the top. The badge uses `accentColor` |
+| `children`    | `ReactNode` | none    | Custom content, rendered between the description and the actions          |
+
+### State and events
+
+| Prop                | Type         | Default  | Description                                                               |
+| ------------------- | ------------ | -------- | ------------------------------------------------------------------------- |
+| `visible`           | `boolean`    | required | Whether the modal is open                                                 |
+| `onClose`           | `() => void` | required | Called when the cancel button or the backdrop is tapped                   |
+| `onConfirm`         | `() => void` | none     | Called when the confirm button is tapped. It does **not** close the modal |
+| `closeOnOverlayTap` | `boolean`    | `true`   | Set to `false` to ignore taps on the backdrop                             |
+
+### Actions
+
+| Prop          | Type        | Default    | Description                                                           |
+| ------------- | ----------- | ---------- | --------------------------------------------------------------------- |
+| `confirmText` | `string`    | none       | Label of the confirm button. The button only renders when this is set |
+| `cancelText`  | `string`    | `'Cancel'` | Label of the cancel button                                            |
+| `footer`      | `ReactNode` | none       | Replaces the default action buttons entirely                          |
+
+### Appearance
+
+| Prop               | Type     | Default                    | Description                                                        |
+| ------------------ | -------- | -------------------------- | ------------------------------------------------------------------ |
+| `accentColor`      | `string` | indigo (`bg-indigo-500`)   | Background of the icon badge and the confirm button. Any CSS color |
+| `surfaceColor`     | `string` | white (`bg-white`)         | Background of the card. Any CSS color                              |
+| `overlayColor`     | `string` | `'rgba(10, 12, 24, 0.55)'` | Backdrop color while the modal is open. Any CSS color              |
+| `className`        | `string` | `''`                       | Extra classes for the card                                         |
+| `overlayClassName` | `string` | `''`                       | Extra classes for the backdrop                                     |
+
+## Type definition
+
+```ts
+export interface ModalProps {
+  visible: boolean;
+  onClose: () => void;
+  title?: string;
+  description?: string;
+  icon?: ReactNode;
+  children?: ReactNode;
+  confirmText?: string;
+  cancelText?: string;
+  onConfirm?: () => void;
+  footer?: ReactNode;
+  closeOnOverlayTap?: boolean;
+  accentColor?: string;
+  surfaceColor?: string;
+  overlayColor?: string;
+  className?: string;
+  overlayClassName?: string;
+}
+```
+
+## Behavior
+
+- **Controlled.** You own `visible`. The modal never opens or closes by itself.
+- **Animation.** On open, the backdrop fades in and the card fades and scales in over 240 ms. On
+  close, the same transition plays in reverse, and the modal unmounts after it finishes.
+- **Backdrop.** A tap on the backdrop calls `onClose` unless `closeOnOverlayTap` is `false`. Taps on
+  the card do not reach the backdrop.
+- **Placement.** The backdrop is positioned over its parent with `z-index: 1000`. Lynx has no portals,
+  so render `<Modal>` at the root of your page.
+- **Size.** The card is 5/6 of the width, up to a maximum of 360 px.
+
+## Examples
+
+### Confirmation dialog
+
+```tsx
+<Modal
+  visible={open}
+  onClose={() => setOpen(false)}
+  title="Discard changes?"
+  description="Your edits will be lost."
+  confirmText="Discard"
+  cancelText="Keep editing"
+  accentColor="#ef4444"
+  onConfirm={() => {
+    discard();
+    setOpen(false);
+  }}
+/>
+```
+
+### Information only (no confirm button)
+
+Leave out `confirmText` and only the cancel button renders. Use `cancelText` to relabel it:
+
+```tsx
+<Modal
+  visible={open}
+  onClose={() => setOpen(false)}
+  title="Update available"
+  description="Restart the app to finish updating."
+  cancelText="Got it"
+/>
+```
+
+### Icon and custom content
+
+```tsx
+<Modal
+  visible={open}
+  onClose={() => setOpen(false)}
+  icon={<text style={{ color: '#ffffff', fontSize: '24px' }}>!</text>}
+  title="Low storage"
+  confirmText="Manage"
+  onConfirm={openSettings}
+>
+  <text>Free up space to keep syncing your photos.</text>
+</Modal>
+```
+
+### Custom footer
+
+`footer` replaces the default buttons, so you can build any layout:
+
+```tsx
+<Modal
+  visible={open}
+  onClose={() => setOpen(false)}
+  title="Rate this app"
+  footer={
+    <view style={{ marginTop: '24px', width: '100%' }} bindtap={() => setOpen(false)}>
+      <text style={{ textAlign: 'center' }}>Maybe later</text>
+    </view>
+  }
+/>
+```
+
+### Block backdrop dismissal
+
+```tsx
+<Modal
+  visible={open}
+  onClose={() => setOpen(false)}
+  closeOnOverlayTap={false}
+  title="Processing"
+  description="Please wait."
+/>
+```
+
+### Theme it
+
+```tsx
+<Modal
+  visible={open}
+  onClose={() => setOpen(false)}
+  title="Dark mode"
+  surfaceColor="#0f172a"
+  overlayColor="rgba(0, 0, 0, 0.75)"
+  accentColor="#22d3ee"
+  confirmText="Enable"
+/>
+```
+
+## Notes
+
+- The default title, description and button text colors are fixed (slate and white), so pick a
+  `surfaceColor` that keeps them readable, or provide your own `footer` and `children`.
+- `className` classes such as `!bg-red-500` come from your app's Tailwind build. If your app does not
+  use Tailwind, use the color props.
+
+
+
+---
+url: /lynx-kit/guide/creating-a-component.md
+---
+
+> For AI agents: the complete documentation index is available at /lynx-kit/llms.txt, the full documentation bundle is available at /lynx-kit/llms-full.txt.
+
+# Creating a component
+
+This guide shows how `@lynx-kit/modal` was built, so you can add the next component to the kit
+(a bottom sheet, a toast and so on) the same way. Every component is its own package in a pnpm
+workspace, with a playground app to try it in.
+
+## Workspace layout
+
+```text
+lynx-kit/
+├─ package.json
+├─ pnpm-workspace.yaml
+├─ .changeset/
+├─ packages/
+│  └─ modal/          -> @lynx-kit/modal
+└─ apps/
+   ├─ playground/     -> an Rspeedy app used to try components
+   └─ docs/           -> this website
+```
+
+
+### Create the workspace
+```bash
+mkdir lynx-kit && cd lynx-kit
+pnpm init
+mkdir packages apps
+```
+```yaml title="pnpm-workspace.yaml"
+packages:
+  - 'packages/*'
+  - 'apps/*'
+```
+```json title="package.json (root)"
+{
+  "private": true,
+  "scripts": {
+    "build": "pnpm -r --filter './packages/*' build",
+    "release": "pnpm build && changeset publish"
+  }
+}
+```
+```bash
+pnpm add -Dw @changesets/cli && pnpm changeset init
+```
+In `.changeset/config.json`, set `"access": "public"`.
+### Scaffold the library package
+```bash
+pnpm create @lynx-js/lynx@latest packages/modal --template rslib-react-ts
+```
+The template creates a Rslib project with a `Counter` example. Keep its `rslib.config.ts`: it must
+keep `target: "web"`, preserve JSX and build in bundleless mode (`bundle: false`), so that `dist/`
+keeps `import './styles.css'` and emits the CSS next to the JavaScript.
+### Name the package
+The template names the package after its folder (`modal`). pnpm links workspace packages by the
+`name` field, so change it to the scoped name:
+```json title="packages/modal/package.json"
+{
+  "name": "@lynx-kit/modal",
+  "version": "0.1.0"
+}
+```
+### Set up Tailwind v3 with a prefix
+```bash
+cd packages/modal
+pnpm add -D tailwindcss@^3 @lynx-js/tailwind-preset
+```
+```js title="packages/modal/tailwind.config.mjs"
+import lynxPreset from '@lynx-js/tailwind-preset';
+
+export default {
+  prefix: 'lk-',
+  content: ['./src/**/*.{ts,tsx}'],
+  presets: [lynxPreset],
+};
+```
+```js title="packages/modal/postcss.config.mjs"
+export default { plugins: { tailwindcss: {} } };
+```
+```css title="packages/modal/src/styles.css"
+@tailwind base;
+@tailwind utilities;
+```
+The library runs Tailwind at build time, so apps do not need to scan `node_modules` for class names.
+The `lk-` prefix keeps the library's classes from clashing with the app's own.
+### Write the component
+Create `src/Modal.tsx`. Layout, color and typography come from `lk-` classes. Animation values live
+in inline styles because they depend on state.
+```tsx title="packages/modal/src/Modal.tsx"
+import { useEffect, useState } from '@lynx-js/react';
+import type { ReactNode } from '@lynx-js/react';
+import './styles.css';
+
+const DURATION = 240;
+
+function usePresence(visible: boolean) {
+  const [mounted, setMounted] = useState(visible);
+  const [shown, setShown] = useState(false);
+
+  useEffect(() => {
+    if (visible) {
+      setMounted(true);
+      const t = setTimeout(() => setShown(true), 16);
+      return () => clearTimeout(t);
+    }
+    setShown(false);
+    const t = setTimeout(() => setMounted(false), DURATION);
+    return () => clearTimeout(t);
+  }, [visible]);
+
+  return { mounted, shown };
+}
+
+export interface ModalProps {
+  visible: boolean;
+  onClose: () => void;
+  title?: string;
+  description?: string;
+  icon?: ReactNode;
+  children?: ReactNode;
+  confirmText?: string;
+  cancelText?: string;
+  onConfirm?: () => void;
+  footer?: ReactNode;
+  closeOnOverlayTap?: boolean;
+  accentColor?: string;
+  surfaceColor?: string;
+  overlayColor?: string;
+  className?: string;
+  overlayClassName?: string;
+}
+
+export function Modal({
+  visible,
+  onClose,
+  title,
+  description,
+  icon,
+  children,
+  confirmText,
+  cancelText = 'Cancel',
+  onConfirm,
+  footer,
+  closeOnOverlayTap = true,
+  accentColor,
+  surfaceColor,
+  overlayColor = 'rgba(10, 12, 24, 0.55)',
+  className = '',
+  overlayClassName = '',
+}: ModalProps) {
+  const { mounted, shown } = usePresence(visible);
+  if (!mounted) return null;
+
+  const accent = accentColor ? { backgroundColor: accentColor } : undefined;
+
+  return (
+    <view
+      className={`lk-fixed lk-top-0 lk-left-0 lk-right-0 lk-bottom-0 lk-flex lk-flex-col lk-items-center lk-justify-center ${overlayClassName}`}
+      style={{
+        zIndex: 1000,
+        backgroundColor: shown ? overlayColor : 'rgba(0, 0, 0, 0)',
+        transition: `background-color ${DURATION}ms ease`,
+      }}
+      bindtap={() => closeOnOverlayTap && onClose()}
+    >
+      <view
+        className={`lk-flex lk-flex-col lk-items-center lk-w-5/6 lk-px-6 lk-pt-7 lk-pb-5 lk-bg-white lk-rounded-3xl ${className}`}
+        style={{
+          maxWidth: '360px',
+          ...(surfaceColor ? { backgroundColor: surfaceColor } : null),
+          opacity: shown ? 1 : 0,
+          transform: shown ? 'scale(1) translateY(0px)' : 'scale(0.92) translateY(16px)',
+          transition: `opacity ${DURATION}ms ease, transform ${DURATION}ms ease`,
+          boxShadow: '0 24px 60px rgba(10, 12, 24, 0.28)',
+        }}
+        catchtap={() => {}}
+      >
+        {icon && (
+          <view
+            className="lk-flex lk-items-center lk-justify-center lk-w-14 lk-h-14 lk-mb-4 lk-rounded-full lk-bg-indigo-500"
+            style={accent}
+          >
+            {icon}
+          </view>
+        )}
+
+        {title && (
+          <text className="lk-text-xl lk-font-bold lk-text-center lk-text-slate-900">{title}</text>
+        )}
+
+        {description && (
+          <text className="lk-mt-2 lk-text-sm lk-text-center lk-text-slate-500">{description}</text>
+        )}
+
+        {children && <view className="lk-w-full lk-mt-4">{children}</view>}
+
+        {footer ?? (
+          <view className="lk-flex lk-flex-row lk-gap-3 lk-w-full lk-mt-6">
+            <view
+              className="lk-flex lk-flex-1 lk-items-center lk-justify-center lk-h-12 lk-rounded-2xl lk-bg-slate-100"
+              bindtap={onClose}
+            >
+              <text className="lk-text-base lk-font-semibold lk-text-slate-800">{cancelText}</text>
+            </view>
+
+            {confirmText && (
+              <view
+                className="lk-flex lk-flex-1 lk-items-center lk-justify-center lk-h-12 lk-rounded-2xl lk-bg-indigo-500"
+                style={accent}
+                bindtap={onConfirm}
+              >
+                <text className="lk-text-base lk-font-semibold lk-text-white">{confirmText}</text>
+              </view>
+            )}
+          </view>
+        )}
+      </view>
+    </view>
+  );
+}
+```
+Design notes:
+- `usePresence` keeps the element mounted for `DURATION` after `visible` becomes `false`, so the exit
+  animation can play. The 16 ms delay on enter lets the first frame render at the start values.
+- The backdrop handles `bindtap` to close. The card uses `catchtap`, which stops the tap from
+  bubbling to the backdrop.
+- `onConfirm` does not close the modal. The parent owns the state, which is the more predictable
+  controlled pattern.
+### Export it
+Use extensionless relative imports. The build keeps JSX, so the output files are `.jsx`, and a `.js`
+extension in the import would point to a file that does not exist.
+```ts title="packages/modal/src/index.ts"
+export type { ModalProps } from './Modal';
+export { Modal } from './Modal';
+```
+### Point the package at its output
+Build once and look at what `dist` contains:
+```bash
+pnpm --filter "@lynx-kit/modal" build
+```
+With JSX preserved you get `index.jsx`, `Modal.jsx`, `styles.css` and the `.d.ts` files, so the entry
+points must name `.jsx`:
+```json title="packages/modal/package.json"
+{
+  "name": "@lynx-kit/modal",
+  "version": "0.1.0",
+  "description": "A customizable modal for Lynx apps, styled with Tailwind.",
+  "license": "MIT",
+  "keywords": ["lynx", "lynxjs", "reactlynx", "modal", "tailwindcss", "ui"],
+  "type": "module",
+  "sideEffects": ["**/*.css"],
+  "main": "./dist/index.jsx",
+  "types": "./dist/index.d.ts",
+  "exports": {
+    ".": {
+      "types": "./dist/index.d.ts",
+      "import": "./dist/index.jsx",
+      "default": "./dist/index.jsx"
+    },
+    "./package.json": "./package.json"
+  },
+  "files": ["dist", "README.md"],
+  "publishConfig": { "access": "public" },
+  "scripts": {
+    "build": "rslib build",
+    "dev": "rslib build --watch",
+    "prepublishOnly": "pnpm build"
+  },
+  "peerDependencies": {
+    "@lynx-js/react": ">=0.100.0",
+    "@lynx-js/types": ">=4",
+    "@types/react": ">=19"
+  }
+}
+```
+Keep the template's `devDependencies`. The `default` condition matters: Rspeedy builds an app twice
+(a background layer and a main-thread layer), and an `exports` map with only `import` can fail to
+resolve in one of them.
+After the build, confirm that `dist/` contains a `.css` file with `lk-` classes and that the built
+component still imports it.
+### Try it in the playground
+```bash
+cd apps/playground
+pnpm add @lynx-kit/modal --workspace
+cd ../..
+pnpm --filter "@lynx-kit/modal" build
+pnpm --filter playground dev
+```
+The playground imports `dist/`, which does not update until you rebuild. Run
+`pnpm --filter "@lynx-kit/modal" dev` in a second terminal for a watcher.
+Start with the template's `Counter` to prove that the wiring works, then swap the export to `Modal`.
+
+## Growing the kit
+
+- **More components.** Add `packages/bottom-sheet`, `packages/toast` and so on, each published as
+  `@lynx-kit/<name>`. When two packages share code such as `usePresence`, move it into
+  `@lynx-kit/core`.
+- **Starter app.** A future unscoped `create-lynx-kit` package could scaffold an Rspeedy app with
+  Tailwind v3, the Lynx preset, PostCSS and `source.include` already configured.
+- **Design tokens.** A shared `@lynx-kit/tailwind-preset` can hold brand colors and radii once there
+  is more than one component.
+
+Next, learn how to [publish to npm](/lynx-kit/guide/publishing.md).
+
+
+
+---
+url: /lynx-kit/guide/get-started/quick-start.md
+---
+
+> For AI agents: the complete documentation index is available at /lynx-kit/llms.txt, the full documentation bundle is available at /lynx-kit/llms-full.txt.
+
+# Quick start
+
+Show your first modal in a few minutes.
+
+
+### Install and configure
+Follow [Installation](/lynx-kit/guide/get-started/installation.md) to add `@lynx-kit/modal` and the
+`source.include` entry.
+### Add the modal to a page
+Keep the open state in your component and render `<Modal>` at the root of the page:
+```tsx title="src/App.tsx"
+import { useState } from '@lynx-js/react';
+import { Modal } from '@lynx-kit/modal';
+
+export function App() {
+  const [open, setOpen] = useState(false);
+
+  return (
+    <view
+      style={{
+        display: 'flex',
+        flexDirection: 'column',
+        flex: 1,
+        alignItems: 'center',
+        justifyContent: 'center',
+      }}
+    >
+      <view
+        style={{ padding: '12px 24px', borderRadius: '16px', backgroundColor: '#6366f1' }}
+        bindtap={() => setOpen(true)}
+      >
+        <text style={{ color: '#ffffff' }}>Show modal</text>
+      </view>
+
+      <Modal
+        visible={open}
+        onClose={() => setOpen(false)}
+        title="Delete project?"
+        description="This action can't be undone."
+        confirmText="Delete"
+        accentColor="#ef4444"
+        onConfirm={() => setOpen(false)}
+      />
+    </view>
+  );
+}
+```
+### Run it
+```bash
+pnpm dev
+```
+Scan the QR code with Lynx Explorer and tap the button.
+
+## Things to know
+
+- **Controlled component.** `onConfirm` does not close the modal. Your code decides what happens, and
+  you close it by setting `visible` to `false`.
+- **Tap handlers.** Lynx uses `bindtap`, not `onClick`.
+- **Render at the page root.** Lynx has no portals, so the overlay covers whichever view it is
+  rendered in. Place `<Modal>` near the top of your page component.
+- **Layout.** A Lynx `view` uses a linear layout by default, so set `display: 'flex'` when you
+  want `align-items` to apply. See [Troubleshooting](/lynx-kit/guide/troubleshooting.md).
+
+Next, read the full [Modal API](/lynx-kit/apis/modal.md).
+
+
+
+---
+url: /lynx-kit/guide/publishing.md
+---
+
+> For AI agents: the complete documentation index is available at /lynx-kit/llms.txt, the full documentation bundle is available at /lynx-kit/llms-full.txt.
+
+# Publishing to npm
+
+How to publish a package from the workspace to the `@lynx-kit` scope.
+
+## Before the first publish
+
+- `src/index.ts` exports the component you are shipping.
+- `packages/<name>/README.md` has the install command, a props table and a usage example.
+- `packages/<name>/LICENSE` contains the MIT license text. Without it the package declares a license
+  it does not include.
+- `pnpm --filter "@lynx-kit/<name>" build` succeeds and `dist/` contains the `.jsx`, `.d.ts` and
+  `.css` files.
+
+## Publish
+
+
+### Turn on two-factor authentication
+npm requires 2FA for publishing. On npmjs.com open **Account**, then **Two-Factor Authentication**,
+and enable it with the **Authorization and publishing** level. Without it, the registry answers with
+a `403 Forbidden` and never asks for a one-time code.
+### Log in and confirm ownership
+Run these from your home folder, not from the repository. The repository declares pnpm as its package
+manager, so npm refuses to run inside it (`EBADDEVENGINES`).
+```bash
+cd ~
+npm login
+npm whoami
+npm org ls lynx-kit
+```
+You should appear in the list with the `owner` role.
+### Inspect what will ship
+```bash
+cd packages/modal
+pnpm build
+pnpm publish --dry-run --no-git-checks
+```
+The tarball should contain only `dist/`, `package.json`, `README.md` and `LICENSE`.
+### Publish
+```bash
+npm publish --access public
+```
+npm opens a browser prompt (or asks for a one-time code). Scoped packages default to private, so
+`--access public` is required. The `publishConfig` in `package.json` already sets it.
+### Verify
+```bash
+cd ~
+npm view @lynx-kit/modal
+```
+Then install it in a fresh Rspeedy app outside the monorepo and render it.
+
+## Releasing a new version
+
+Versions are permanent. You cannot republish a version number, so bump it first:
+
+```bash
+pnpm changeset          # pick the package, choose major, minor or patch, write a summary
+pnpm changeset version  # bumps the version and writes CHANGELOG.md
+```
+
+Then publish again from the package folder.
+
+## Giving your team access
+
+After the first publish, open the organization's **Teams** page on npmjs.com, add the package to a
+team and choose read-only or read/write. The package list stays empty until a package exists.
+
+## Publishing from CI
+
+npm is restricting tokens that bypass 2FA for direct publishing. When you automate releases, use
+npm's trusted publishing (OIDC) from GitHub Actions instead of a long-lived token.
+
+## Test the tarball before you publish
+
+```bash
+cd packages/modal
+pnpm pack
+```
+
+In a fresh Rspeedy app run `pnpm add path/to/lynx-kit-modal-0.1.0.tgz`. If you hit a JSX error, add
+`source.include` as described in [Installation](/lynx-kit/guide/get-started/installation.md).
+
+
+
+---
+url: /lynx-kit/guide/styling.md
+---
+
+> For AI agents: the complete documentation index is available at /lynx-kit/llms.txt, the full documentation bundle is available at /lynx-kit/llms-full.txt.
+
+# Styling and theming
+
+Lynx Kit components are styled with Tailwind CSS v3, compiled when the library is built. That has
+three consequences for you:
+
+1. Your app does **not** need Tailwind for the components to look right.
+2. Every class inside the library starts with `lk-`, for example `lk-bg-white`, so the library
+   cannot clash with your own classes.
+3. There are no CSS variables to configure in the host app.
+
+## Change colors with props
+
+The quickest way to theme a component is through its color props. They accept any CSS color and are
+applied inline:
+
+```tsx
+<Modal
+  visible={open}
+  onClose={() => setOpen(false)}
+  title="Sign out?"
+  confirmText="Sign out"
+  accentColor="#0ea5e9"
+  surfaceColor="#0f172a"
+  overlayColor="rgba(0, 0, 0, 0.7)"
+/>
+```
+
+| Prop           | What it changes                       |
+| -------------- | ------------------------------------- |
+| `accentColor`  | The icon badge and the confirm button |
+| `surfaceColor` | The card background                   |
+| `overlayColor` | The dimmed backdrop                   |
+
+## Extend with classes
+
+Every component accepts `className` for the card and `overlayClassName` for the backdrop. These
+classes are added after the defaults.
+
+If your app uses Tailwind v3, use the `!` (important) modifier to win over a default:
+
+```tsx
+<Modal className="!bg-slate-900" overlayClassName="!bg-black/80" visible={open} onClose={close} />
+```
+
+Those classes are generated by **your** Tailwind build, not the library's, so the app must have
+Tailwind configured. Otherwise, use the color props above.
+
+## Using Tailwind in your own Lynx app
+
+Lynx currently requires Tailwind CSS v3. The v4 packages are not compatible with
+`@lynx-js/tailwind-preset`, which removes the utilities Lynx does not support and swaps in
+Lynx-specific alternatives. The preset is still marked unstable.
+
+```bash
+pnpm add -D tailwindcss@^3 @lynx-js/tailwind-preset
+```
+
+```js title="postcss.config.mjs"
+export default { plugins: { tailwindcss: {} } };
+```
+
+```js title="tailwind.config.mjs"
+import lynxPreset from '@lynx-js/tailwind-preset';
+
+export default {
+  content: ['./src/**/*.{js,ts,jsx,tsx}'],
+  presets: [lynxPreset],
+};
+```
+
+```css title="src/App.css"
+@tailwind base;
+@tailwind utilities;
+```
+
+## Animation
+
+Animation values (opacity, scale, translate and duration) are inline styles, because they change with
+state and not every Tailwind transition or transform utility is supported by the Lynx preset.
+
+
+
+---
+url: /lynx-kit/guide/troubleshooting.md
+---
+
+> For AI agents: the complete documentation index is available at /lynx-kit/llms.txt, the full documentation bundle is available at /lynx-kit/llms-full.txt.
+
+# Troubleshooting
+
+## JSX syntax error from `node_modules/@lynx-kit/modal`
+
+The package ships `.jsx` files and bundlers skip `node_modules` by default. Add the package to
+`source.include` in your `lynx.config.ts`, then restart the dev server:
+
+```ts
+export default defineConfig({
+  source: { include: [/@lynx-kit/] },
+  // ...
+});
+```
+
+## Items are not centered
+
+A Lynx `view` defaults to `display: linear`, where `justify-content` works but `align-items` is
+ignored. Set the display mode explicitly:
+
+```tsx
+<view
+  style={{
+    display: 'flex',
+    flexDirection: 'column',
+    flex: 1,
+    alignItems: 'center',
+    justifyContent: 'center',
+  }}
+>
+```
+
+If the view does not fill the screen, give the root element a defined size, since `flex: 1` needs a
+sized parent.
+
+## The modal does not close
+
+`onConfirm` never closes the modal. Set `visible` to `false` in your handler:
+
+```tsx
+onConfirm={() => {
+  save();
+  setOpen(false);
+}}
+```
+
+## Click handlers do nothing
+
+Lynx uses `bindtap` and `catchtap`, not `onClick`.
+
+## The modal is hidden behind other content
+
+Lynx has no portals. Render `<Modal>` at the root of the page, not inside a scroll view or a
+clipped container.
+
+## `Can't resolve '@lynx-kit/modal'` in a monorepo
+
+When you develop the library inside a pnpm workspace, check these in order:
+
+1. The `name` field in `packages/modal/package.json` must be exactly `@lynx-kit/modal`. Run
+   `pnpm ls -r --depth -1` to see the names pnpm uses.
+2. The playground must depend on it: `"@lynx-kit/modal": "workspace:*"`.
+3. Build output decides the entry. Check `dist` and make sure `main`, `types` and `exports` point at
+   files that exist. See [Creating a component](/lynx-kit/guide/creating-a-component.md).
+4. Restart the dev server after changing `package.json`, since resolution failures are cached.
+
+## `npm` commands fail with `EBADDEVENGINES`
+
+The repository declares pnpm as its package manager, so npm refuses to run inside it. Run `npm login`
+and `npm org ls` from your home folder, and use `pnpm` for everything inside the repository.
+
+
+
+---
+url: /lynx-kit/index.md
+---
+
+> For AI agents: the complete documentation index is available at /lynx-kit/llms.txt, the full documentation bundle is available at /lynx-kit/llms-full.txt.
+
+# Public Beta
+
+UI components for Lynx apps
+
+> Customizable, animated and typed. Install one package and use it.
+
+[Get Started](/guide/get-started/installation) | [API Reference](/apis/modal)
+
+## Features
+
+- /icons/icon-lynx-native.svg **Built for Lynx**: Written with Lynx elements and events (view, text, bindtap), so it renders natively on Android and iOS.
+- /icons/icon-tailwind.svg **Tailwind, precompiled**: Styled with Tailwind v3 at build time. Your app does not need Tailwind, and every class uses an lk- prefix so nothing clashes.
+- /icons/icon-controlled.svg **Controlled API**: You own the state. Pass visible and onClose, and the component never surprises you.
+- /icons/icon-colors.svg **Easy to theme**: Override the accent, surface and overlay colors with plain props, or extend the classes.
+- /icons/icon-typed.svg **Typed**: Ships TypeScript declarations, so props autocomplete in your editor.
+- /icons/icon-animated.svg **Animated**: Enter and exit transitions are built in, driven by a small presence hook.
+
+

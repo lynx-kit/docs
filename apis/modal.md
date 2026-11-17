@@ -1,0 +1,238 @@
+> For AI agents: the complete documentation index is available at /lynx-kit/llms.txt, the full documentation bundle is available at /lynx-kit/llms-full.txt.
+
+# Modal
+
+A customizable, animated modal dialog for Lynx apps. Package: `@lynx-kit/modal`.
+
+## Install
+
+
+```sh [npm]
+npm install @lynx-kit/modal
+```
+
+```sh [yarn]
+yarn add @lynx-kit/modal
+```
+
+```sh [pnpm]
+pnpm add @lynx-kit/modal
+```
+
+```sh [bun]
+bun add @lynx-kit/modal
+```
+
+```sh [deno]
+deno add npm:@lynx-kit/modal
+```
+
+Add the package to `source.include` in `lynx.config.ts`. See
+[Installation](/lynx-kit/guide/get-started/installation.md#compile-the-package-source).
+
+## Import
+
+```ts
+import { Modal } from '@lynx-kit/modal';
+import type { ModalProps } from '@lynx-kit/modal';
+```
+
+## Usage
+
+```tsx
+import { useState } from '@lynx-js/react';
+import { Modal } from '@lynx-kit/modal';
+
+export function Example() {
+  const [open, setOpen] = useState(false);
+
+  return (
+    <view>
+      <view bindtap={() => setOpen(true)}>
+        <text>Show modal</text>
+      </view>
+
+      <Modal
+        visible={open}
+        onClose={() => setOpen(false)}
+        title="Delete project?"
+        description="This action can't be undone."
+        confirmText="Delete"
+        accentColor="#ef4444"
+        onConfirm={() => setOpen(false)}
+      />
+    </view>
+  );
+}
+```
+
+## Props
+
+### Content
+
+| Prop          | Type        | Default | Description                                                               |
+| ------------- | ----------- | ------- | ------------------------------------------------------------------------- |
+| `title`       | `string`    | none    | Heading text, centered below the icon                                     |
+| `description` | `string`    | none    | Supporting text under the title                                           |
+| `icon`        | `ReactNode` | none    | Rendered inside a circular badge at the top. The badge uses `accentColor` |
+| `children`    | `ReactNode` | none    | Custom content, rendered between the description and the actions          |
+
+### State and events
+
+| Prop                | Type         | Default  | Description                                                               |
+| ------------------- | ------------ | -------- | ------------------------------------------------------------------------- |
+| `visible`           | `boolean`    | required | Whether the modal is open                                                 |
+| `onClose`           | `() => void` | required | Called when the cancel button or the backdrop is tapped                   |
+| `onConfirm`         | `() => void` | none     | Called when the confirm button is tapped. It does **not** close the modal |
+| `closeOnOverlayTap` | `boolean`    | `true`   | Set to `false` to ignore taps on the backdrop                             |
+
+### Actions
+
+| Prop          | Type        | Default    | Description                                                           |
+| ------------- | ----------- | ---------- | --------------------------------------------------------------------- |
+| `confirmText` | `string`    | none       | Label of the confirm button. The button only renders when this is set |
+| `cancelText`  | `string`    | `'Cancel'` | Label of the cancel button                                            |
+| `footer`      | `ReactNode` | none       | Replaces the default action buttons entirely                          |
+
+### Appearance
+
+| Prop               | Type     | Default                    | Description                                                        |
+| ------------------ | -------- | -------------------------- | ------------------------------------------------------------------ |
+| `accentColor`      | `string` | indigo (`bg-indigo-500`)   | Background of the icon badge and the confirm button. Any CSS color |
+| `surfaceColor`     | `string` | white (`bg-white`)         | Background of the card. Any CSS color                              |
+| `overlayColor`     | `string` | `'rgba(10, 12, 24, 0.55)'` | Backdrop color while the modal is open. Any CSS color              |
+| `className`        | `string` | `''`                       | Extra classes for the card                                         |
+| `overlayClassName` | `string` | `''`                       | Extra classes for the backdrop                                     |
+
+## Type definition
+
+```ts
+export interface ModalProps {
+  visible: boolean;
+  onClose: () => void;
+  title?: string;
+  description?: string;
+  icon?: ReactNode;
+  children?: ReactNode;
+  confirmText?: string;
+  cancelText?: string;
+  onConfirm?: () => void;
+  footer?: ReactNode;
+  closeOnOverlayTap?: boolean;
+  accentColor?: string;
+  surfaceColor?: string;
+  overlayColor?: string;
+  className?: string;
+  overlayClassName?: string;
+}
+```
+
+## Behavior
+
+- **Controlled.** You own `visible`. The modal never opens or closes by itself.
+- **Animation.** On open, the backdrop fades in and the card fades and scales in over 240 ms. On
+  close, the same transition plays in reverse, and the modal unmounts after it finishes.
+- **Backdrop.** A tap on the backdrop calls `onClose` unless `closeOnOverlayTap` is `false`. Taps on
+  the card do not reach the backdrop.
+- **Placement.** The backdrop is positioned over its parent with `z-index: 1000`. Lynx has no portals,
+  so render `<Modal>` at the root of your page.
+- **Size.** The card is 5/6 of the width, up to a maximum of 360 px.
+
+## Examples
+
+### Confirmation dialog
+
+```tsx
+<Modal
+  visible={open}
+  onClose={() => setOpen(false)}
+  title="Discard changes?"
+  description="Your edits will be lost."
+  confirmText="Discard"
+  cancelText="Keep editing"
+  accentColor="#ef4444"
+  onConfirm={() => {
+    discard();
+    setOpen(false);
+  }}
+/>
+```
+
+### Information only (no confirm button)
+
+Leave out `confirmText` and only the cancel button renders. Use `cancelText` to relabel it:
+
+```tsx
+<Modal
+  visible={open}
+  onClose={() => setOpen(false)}
+  title="Update available"
+  description="Restart the app to finish updating."
+  cancelText="Got it"
+/>
+```
+
+### Icon and custom content
+
+```tsx
+<Modal
+  visible={open}
+  onClose={() => setOpen(false)}
+  icon={<text style={{ color: '#ffffff', fontSize: '24px' }}>!</text>}
+  title="Low storage"
+  confirmText="Manage"
+  onConfirm={openSettings}
+>
+  <text>Free up space to keep syncing your photos.</text>
+</Modal>
+```
+
+### Custom footer
+
+`footer` replaces the default buttons, so you can build any layout:
+
+```tsx
+<Modal
+  visible={open}
+  onClose={() => setOpen(false)}
+  title="Rate this app"
+  footer={
+    <view style={{ marginTop: '24px', width: '100%' }} bindtap={() => setOpen(false)}>
+      <text style={{ textAlign: 'center' }}>Maybe later</text>
+    </view>
+  }
+/>
+```
+
+### Block backdrop dismissal
+
+```tsx
+<Modal
+  visible={open}
+  onClose={() => setOpen(false)}
+  closeOnOverlayTap={false}
+  title="Processing"
+  description="Please wait."
+/>
+```
+
+### Theme it
+
+```tsx
+<Modal
+  visible={open}
+  onClose={() => setOpen(false)}
+  title="Dark mode"
+  surfaceColor="#0f172a"
+  overlayColor="rgba(0, 0, 0, 0.75)"
+  accentColor="#22d3ee"
+  confirmText="Enable"
+/>
+```
+
+## Notes
+
+- The default title, description and button text colors are fixed (slate and white), so pick a
+  `surfaceColor` that keeps them readable, or provide your own `footer` and `children`.
+- `className` classes such as `!bg-red-500` come from your app's Tailwind build. If your app does not
+  use Tailwind, use the color props.
