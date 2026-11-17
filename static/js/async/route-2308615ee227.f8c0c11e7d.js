@@ -182,7 +182,7 @@ MDXContent.__RSPRESS_PAGE_META["index.mdx"] = {
         "title": "Lynx Kit",
         "description": "Customizable UI components for Lynx apps, styled with Tailwind",
         "hero": {
-            "name": "Public Beta",
+            "name": "Alpha Version",
             "text": "UI components for Lynx apps",
             "tagline": "Customizable, animated and typed. Install one package and use it.",
             "actions": [

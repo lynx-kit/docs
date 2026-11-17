@@ -1,6 +1,6 @@
 > For AI agents: the complete documentation index is available at /docs/llms.txt, the full documentation bundle is available at /docs/llms-full.txt.
 
-# Public Beta
+# Alpha Version
 
 UI components for Lynx apps
 

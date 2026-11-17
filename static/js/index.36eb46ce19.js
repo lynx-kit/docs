@@ -590,7 +590,7 @@ const pageData = {
                 "title": "Lynx Kit",
                 "description": "Customizable UI components for Lynx apps, styled with Tailwind",
                 "hero": {
-                    "name": "Public Beta",
+                    "name": "Alpha Version",
                     "text": "UI components for Lynx apps",
                     "tagline": "Customizable, animated and typed. Install one package and use it.",
                     "actions": [
@@ -1472,7 +1472,7 @@ __webpack_require__.u = (chunkId) => {
   // return url for filenames not based on template
   
   // return url for filenames based on template
-  return "static/js/async/" + ({1: "route-d2e90721d507",7: "route-bbbd1867e35c","b": "route-63f9cf072066","h": "route-27ffdaaad7b9","l": "route-5f317acbe481","p": "route-2308615ee227","pk": "route-896be654a6b0","v": "route-765e4bc469e9","vk": "route-a12a507b492e",}[chunkId] || chunkId) + "." + {1: "c1a08b59c4",2: "dca98430ab",7: "9f2135e7b0","b": "fd8f0b7294","h": "c3f38951b1","l": "40f48b296e","p": "7111d89b3e","pk": "15f40d6f9f","v": "f318efd3db","vk": "b6895d9db4",}[chunkId] + ".js"
+  return "static/js/async/" + ({1: "route-d2e90721d507",7: "route-bbbd1867e35c","b": "route-63f9cf072066","h": "route-27ffdaaad7b9","l": "route-5f317acbe481","p": "route-2308615ee227","pk": "route-896be654a6b0","v": "route-765e4bc469e9","vk": "route-a12a507b492e",}[chunkId] || chunkId) + "." + {1: "c1a08b59c4",2: "dca98430ab",7: "9f2135e7b0","b": "fd8f0b7294","h": "c3f38951b1","l": "40f48b296e","p": "f8c0c11e7d","pk": "15f40d6f9f","v": "f318efd3db","vk": "b6895d9db4",}[chunkId] + ".js"
 }
 })();
 // webpack/runtime/get mini-css chunk filename

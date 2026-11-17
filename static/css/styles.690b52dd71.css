@@ -806,7 +806,7 @@ html:not(.dark) .rp-home-background:before {
 }
 
 .rp-home-hero__action .rp-button, .rp-button.rp-button--big {
-  border-radius: 12px;
+  border-radius: 60px;
   min-width: 160px;
   height: 50px;
   font-size: 15px;
@@ -877,7 +877,7 @@ html:not(.dark) .rp-button.rp-button--brand {
   font: inherit;
   cursor: pointer;
   background: none;
-  border-radius: 8px;
+  border-radius: 60px;
   padding: 5px 14px;
   font-size: .82rem;
   font-weight: 500;
