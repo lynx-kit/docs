@@ -1,0 +1,19 @@
+{
+  "name": "docs",
+  "version": "0.0.0",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "dev": "rspress dev",
+    "build": "rspress build",
+    "preview": "rspress preview"
+  },
+  "devDependencies": {
+    "@rspress/core": "^2.0.3",
+    "@types/react": "^19.2.18",
+    "typescript": "^6.0.3"
+  },
+  "engines": {
+    "node": ">=20"
+  }
+}

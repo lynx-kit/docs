@@ -1,0 +1,62 @@
+---
+pageType: home
+title: Lynx Kit
+description: Customizable UI components for Lynx apps, styled with Tailwind
+hero:
+  name: Public Beta
+  text: |-
+    UI components for Lynx apps
+  tagline: |-
+    Customizable, animated and typed. Install one package and use it.
+  actions:
+    - text: Get Started
+      link: /guide/get-started/installation
+      theme: brand
+    - text: API Reference
+      link: /apis/modal
+      theme: alt
+features:
+  - icon: /icons/icon-lynx-native.svg
+    title: Built for Lynx
+    details: Written with Lynx elements and events (view, text, bindtap), so it renders natively on Android and iOS.
+
+  - icon: /icons/icon-tailwind.svg
+    title: Tailwind, precompiled
+    details: Styled with Tailwind v3 at build time. Your app does not need Tailwind, and every class uses an lk- prefix so nothing clashes.
+
+  - icon: /icons/icon-controlled.svg
+    title: Controlled API
+    details: You own the state. Pass visible and onClose, and the component never surprises you.
+
+  - icon: /icons/icon-colors.svg
+    title: Easy to theme
+    details: Override the accent, surface and overlay colors with plain props, or extend the classes.
+
+  - icon: /icons/icon-typed.svg
+    title: Typed
+    details: Ships TypeScript declarations, so props autocomplete in your editor.
+
+  - icon: /icons/icon-animated.svg
+    title: Animated
+    details: Enter and exit transitions are built in, driven by a small presence hook.
+---
+
+## What is Lynx Kit?
+
+Lynx Kit is a growing collection of UI components for [Lynx](https://lynxjs.org) apps. Each component is
+published as its own package under the `@lynx-kit` scope, so you install only what you use.
+
+Today the kit contains one component:
+
+| Package | Description |
+| --- | --- |
+| [`@lynx-kit/modal`](/apis/modal) | A customizable, animated modal dialog |
+
+More components, such as a bottom sheet, are planned.
+
+## Quick links
+
+- [Install the modal](/guide/get-started/installation)
+- [Quick start](/guide/get-started/quick-start)
+- [Modal API reference](/apis/modal)
+- [Create your own component in the kit](/guide/creating-a-component)

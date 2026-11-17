@@ -1,0 +1,11 @@
+Lynx Kit documentation site
+Copyright 2026 Vennor
+
+The site structure, Rspress configuration and theme overrides are adapted from
+the Sparkling documentation website (https://github.com/tiktok/Sparkling),
+which is licensed under the Apache License, Version 2.0
+(https://www.apache.org/licenses/LICENSE-2.0).
+
+Changes: content, branding, colors, icons and navigation were replaced for
+Lynx Kit. TikTok and Sparkling trademarks, logos, fonts and video assets are
+not included.
