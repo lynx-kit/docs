@@ -1,4 +1,4 @@
-> For AI agents: the complete documentation index is available at /lynx-kit/llms.txt, the full documentation bundle is available at /lynx-kit/llms-full.txt.
+> For AI agents: the complete documentation index is available at /docs/llms.txt, the full documentation bundle is available at /docs/llms-full.txt.
 
 # Publishing to npm
 
@@ -79,4 +79,4 @@ pnpm pack
 ```
 
 In a fresh Rspeedy app run `pnpm add path/to/lynx-kit-modal-0.1.0.tgz`. If you hit a JSX error, add
-`source.include` as described in [Installation](/lynx-kit/guide/get-started/installation.md).
+`source.include` as described in [Installation](/docs/guide/get-started/installation.md).

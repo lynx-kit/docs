@@ -1,8 +1,8 @@
 ---
-url: /lynx-kit/guide/get-started/installation.md
+url: /docs/guide/get-started/installation.md
 ---
 
-> For AI agents: the complete documentation index is available at /lynx-kit/llms.txt, the full documentation bundle is available at /lynx-kit/llms-full.txt.
+> For AI agents: the complete documentation index is available at /docs/llms.txt, the full documentation bundle is available at /docs/llms-full.txt.
 
 # Installation
 
@@ -69,27 +69,27 @@ Without this entry you will see a JSX syntax error that points into
 ## Tailwind is optional
 
 The modal ships its own precompiled CSS, so your app does not need Tailwind. If your app does use
-Tailwind, see [Styling and Theming](/lynx-kit/guide/styling.md) to learn how to combine them.
+Tailwind, see [Styling and Theming](/docs/guide/styling.md) to learn how to combine them.
 
 ## Next step
 
-Continue with the [Quick Start](/lynx-kit/guide/get-started/quick-start.md).
+Continue with the [Quick Start](/docs/guide/get-started/quick-start.md).
 
 
 
 ---
-url: /lynx-kit/apis/index.md
+url: /docs/apis/index.md
 ---
 
-> For AI agents: the complete documentation index is available at /lynx-kit/llms.txt, the full documentation bundle is available at /lynx-kit/llms-full.txt.
+> For AI agents: the complete documentation index is available at /docs/llms.txt, the full documentation bundle is available at /docs/llms-full.txt.
 
 # API overview
 
 ## Components
 
-| Package           | Component                        | Description                                                                                     |
-| ----------------- | -------------------------------- | ----------------------------------------------------------------------------------------------- |
-| `@lynx-kit/modal` | [Modal](/lynx-kit/apis/modal.md) | A customizable, animated modal dialog with title, description, icon, custom content and actions |
+| Package           | Component                    | Description                                                                                     |
+| ----------------- | ---------------------------- | ----------------------------------------------------------------------------------------------- |
+| `@lynx-kit/modal` | [Modal](/docs/apis/modal.md) | A customizable, animated modal dialog with title, description, icon, custom content and actions |
 
 ## Conventions
 
@@ -106,10 +106,10 @@ These rules apply to every Lynx Kit component.
 
 
 ---
-url: /lynx-kit/apis/modal.md
+url: /docs/apis/modal.md
 ---
 
-> For AI agents: the complete documentation index is available at /lynx-kit/llms.txt, the full documentation bundle is available at /lynx-kit/llms-full.txt.
+> For AI agents: the complete documentation index is available at /docs/llms.txt, the full documentation bundle is available at /docs/llms-full.txt.
 
 # Modal
 
@@ -139,7 +139,7 @@ deno add npm:@lynx-kit/modal
 ```
 
 Add the package to `source.include` in `lynx.config.ts`. See
-[Installation](/lynx-kit/guide/get-started/installation.md#compile-the-package-source).
+[Installation](/docs/guide/get-started/installation.md#compile-the-package-source).
 
 ## Import
 
@@ -351,10 +351,10 @@ Leave out `confirmText` and only the cancel button renders. Use `cancelText` to 
 
 
 ---
-url: /lynx-kit/guide/creating-a-component.md
+url: /docs/guide/creating-a-component.md
 ---
 
-> For AI agents: the complete documentation index is available at /lynx-kit/llms.txt, the full documentation bundle is available at /lynx-kit/llms-full.txt.
+> For AI agents: the complete documentation index is available at /docs/llms.txt, the full documentation bundle is available at /docs/llms-full.txt.
 
 # Creating a component
 
@@ -657,15 +657,15 @@ Start with the template's `Counter` to prove that the wiring works, then swap th
 - **Design tokens.** A shared `@lynx-kit/tailwind-preset` can hold brand colors and radii once there
   is more than one component.
 
-Next, learn how to [publish to npm](/lynx-kit/guide/publishing.md).
+Next, learn how to [publish to npm](/docs/guide/publishing.md).
 
 
 
 ---
-url: /lynx-kit/guide/get-started/quick-start.md
+url: /docs/guide/get-started/quick-start.md
 ---
 
-> For AI agents: the complete documentation index is available at /lynx-kit/llms.txt, the full documentation bundle is available at /lynx-kit/llms-full.txt.
+> For AI agents: the complete documentation index is available at /docs/llms.txt, the full documentation bundle is available at /docs/llms-full.txt.
 
 # Quick start
 
@@ -673,7 +673,7 @@ Show your first modal in a few minutes.
 
 
 ### Install and configure
-Follow [Installation](/lynx-kit/guide/get-started/installation.md) to add `@lynx-kit/modal` and the
+Follow [Installation](/docs/guide/get-started/installation.md) to add `@lynx-kit/modal` and the
 `source.include` entry.
 ### Add the modal to a page
 Keep the open state in your component and render `<Modal>` at the root of the page:
@@ -728,17 +728,17 @@ Scan the QR code with Lynx Explorer and tap the button.
 - **Render at the page root.** Lynx has no portals, so the overlay covers whichever view it is
   rendered in. Place `<Modal>` near the top of your page component.
 - **Layout.** A Lynx `view` uses a linear layout by default, so set `display: 'flex'` when you
-  want `align-items` to apply. See [Troubleshooting](/lynx-kit/guide/troubleshooting.md).
+  want `align-items` to apply. See [Troubleshooting](/docs/guide/troubleshooting.md).
 
-Next, read the full [Modal API](/lynx-kit/apis/modal.md).
+Next, read the full [Modal API](/docs/apis/modal.md).
 
 
 
 ---
-url: /lynx-kit/guide/publishing.md
+url: /docs/guide/publishing.md
 ---
 
-> For AI agents: the complete documentation index is available at /lynx-kit/llms.txt, the full documentation bundle is available at /lynx-kit/llms-full.txt.
+> For AI agents: the complete documentation index is available at /docs/llms.txt, the full documentation bundle is available at /docs/llms-full.txt.
 
 # Publishing to npm
 
@@ -819,15 +819,15 @@ pnpm pack
 ```
 
 In a fresh Rspeedy app run `pnpm add path/to/lynx-kit-modal-0.1.0.tgz`. If you hit a JSX error, add
-`source.include` as described in [Installation](/lynx-kit/guide/get-started/installation.md).
+`source.include` as described in [Installation](/docs/guide/get-started/installation.md).
 
 
 
 ---
-url: /lynx-kit/guide/styling.md
+url: /docs/guide/styling.md
 ---
 
-> For AI agents: the complete documentation index is available at /lynx-kit/llms.txt, the full documentation bundle is available at /lynx-kit/llms-full.txt.
+> For AI agents: the complete documentation index is available at /docs/llms.txt, the full documentation bundle is available at /docs/llms-full.txt.
 
 # Styling and theming
 
@@ -912,10 +912,10 @@ state and not every Tailwind transition or transform utility is supported by the
 
 
 ---
-url: /lynx-kit/guide/troubleshooting.md
+url: /docs/guide/troubleshooting.md
 ---
 
-> For AI agents: the complete documentation index is available at /lynx-kit/llms.txt, the full documentation bundle is available at /lynx-kit/llms-full.txt.
+> For AI agents: the complete documentation index is available at /docs/llms.txt, the full documentation bundle is available at /docs/llms-full.txt.
 
 # Troubleshooting
 
@@ -979,7 +979,7 @@ When you develop the library inside a pnpm workspace, check these in order:
    `pnpm ls -r --depth -1` to see the names pnpm uses.
 2. The playground must depend on it: `"@lynx-kit/modal": "workspace:*"`.
 3. Build output decides the entry. Check `dist` and make sure `main`, `types` and `exports` point at
-   files that exist. See [Creating a component](/lynx-kit/guide/creating-a-component.md).
+   files that exist. See [Creating a component](/docs/guide/creating-a-component.md).
 4. Restart the dev server after changing `package.json`, since resolution failures are cached.
 
 ## `npm` commands fail with `EBADDEVENGINES`
@@ -990,10 +990,10 @@ and `npm org ls` from your home folder, and use `pnpm` for everything inside the
 
 
 ---
-url: /lynx-kit/index.md
+url: /docs/index.md
 ---
 
-> For AI agents: the complete documentation index is available at /lynx-kit/llms.txt, the full documentation bundle is available at /lynx-kit/llms-full.txt.
+> For AI agents: the complete documentation index is available at /docs/llms.txt, the full documentation bundle is available at /docs/llms-full.txt.
 
 # Public Beta
 

@@ -1,4 +1,4 @@
-> For AI agents: the complete documentation index is available at /lynx-kit/llms.txt, the full documentation bundle is available at /lynx-kit/llms-full.txt.
+> For AI agents: the complete documentation index is available at /docs/llms.txt, the full documentation bundle is available at /docs/llms-full.txt.
 
 # Installation
 
@@ -65,8 +65,8 @@ Without this entry you will see a JSX syntax error that points into
 ## Tailwind is optional
 
 The modal ships its own precompiled CSS, so your app does not need Tailwind. If your app does use
-Tailwind, see [Styling and Theming](/lynx-kit/guide/styling.md) to learn how to combine them.
+Tailwind, see [Styling and Theming](/docs/guide/styling.md) to learn how to combine them.
 
 ## Next step
 
-Continue with the [Quick Start](/lynx-kit/guide/get-started/quick-start.md).
+Continue with the [Quick Start](/docs/guide/get-started/quick-start.md).

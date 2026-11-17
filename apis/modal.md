@@ -1,4 +1,4 @@
-> For AI agents: the complete documentation index is available at /lynx-kit/llms.txt, the full documentation bundle is available at /lynx-kit/llms-full.txt.
+> For AI agents: the complete documentation index is available at /docs/llms.txt, the full documentation bundle is available at /docs/llms-full.txt.
 
 # Modal
 
@@ -28,7 +28,7 @@ deno add npm:@lynx-kit/modal
 ```
 
 Add the package to `source.include` in `lynx.config.ts`. See
-[Installation](/lynx-kit/guide/get-started/installation.md#compile-the-package-source).
+[Installation](/docs/guide/get-started/installation.md#compile-the-package-source).
 
 ## Import
 

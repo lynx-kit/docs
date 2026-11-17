@@ -4,14 +4,14 @@
 
 ## Guide
 
-- [Installation](/lynx-kit/guide/get-started/installation.md): Lynx Kit components are published to npm under the @lynx-kit scope. Each component is its own package, so you add only the ones you need.
+- [Installation](/docs/guide/get-started/installation.md): Lynx Kit components are published to npm under the @lynx-kit scope. Each component is its own package, so you add only the ones you need.
 
 ## Others
 
-- [API overview](/lynx-kit/apis/index.md)
-- [Modal](/lynx-kit/apis/modal.md): A customizable, animated modal dialog for Lynx apps. Package: @lynx-kit/modal.
-- [Creating a component](/lynx-kit/guide/creating-a-component.md): This guide shows how @lynx-kit/modal was built, so you can add the next component to the kit (a bottom sheet, a toast and so on) the same way. Every component is its own package in a pnpm workspace, with a playground app to try it in.
-- [Quick start](/lynx-kit/guide/get-started/quick-start.md): Show your first modal in a few minutes. Install and configure Follow Installation to add @lynx-kit/modal and the source.include entry. Add the modal to a page Keep the open state in your component and render <Modal> at the root of the page: Run it Scan the QR code with Lynx Explorer and tap the button.
-- [Publishing to npm](/lynx-kit/guide/publishing.md): How to publish a package from the workspace to the @lynx-kit scope.
-- [Styling and theming](/lynx-kit/guide/styling.md): Lynx Kit components are styled with Tailwind CSS v3, compiled when the library is built. That has three consequences for you: Your app does not need Tailwind for the components to look right.Every class inside the library starts with lk-, for example lk-bg-white, so the library cannot clash with your own classes.There are no CSS variables to configure in the host app.
-- [Troubleshooting](/lynx-kit/guide/troubleshooting.md)
+- [API overview](/docs/apis/index.md)
+- [Modal](/docs/apis/modal.md): A customizable, animated modal dialog for Lynx apps. Package: @lynx-kit/modal.
+- [Creating a component](/docs/guide/creating-a-component.md): This guide shows how @lynx-kit/modal was built, so you can add the next component to the kit (a bottom sheet, a toast and so on) the same way. Every component is its own package in a pnpm workspace, with a playground app to try it in.
+- [Quick start](/docs/guide/get-started/quick-start.md): Show your first modal in a few minutes. Install and configure Follow Installation to add @lynx-kit/modal and the source.include entry. Add the modal to a page Keep the open state in your component and render <Modal> at the root of the page: Run it Scan the QR code with Lynx Explorer and tap the button.
+- [Publishing to npm](/docs/guide/publishing.md): How to publish a package from the workspace to the @lynx-kit scope.
+- [Styling and theming](/docs/guide/styling.md): Lynx Kit components are styled with Tailwind CSS v3, compiled when the library is built. That has three consequences for you: Your app does not need Tailwind for the components to look right.Every class inside the library starts with lk-, for example lk-bg-white, so the library cannot clash with your own classes.There are no CSS variables to configure in the host app.
+- [Troubleshooting](/docs/guide/troubleshooting.md)

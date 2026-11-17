@@ -1,4 +1,4 @@
-> For AI agents: the complete documentation index is available at /lynx-kit/llms.txt, the full documentation bundle is available at /lynx-kit/llms-full.txt.
+> For AI agents: the complete documentation index is available at /docs/llms.txt, the full documentation bundle is available at /docs/llms-full.txt.
 
 # Troubleshooting
 
@@ -62,7 +62,7 @@ When you develop the library inside a pnpm workspace, check these in order:
    `pnpm ls -r --depth -1` to see the names pnpm uses.
 2. The playground must depend on it: `"@lynx-kit/modal": "workspace:*"`.
 3. Build output decides the entry. Check `dist` and make sure `main`, `types` and `exports` point at
-   files that exist. See [Creating a component](/lynx-kit/guide/creating-a-component.md).
+   files that exist. See [Creating a component](/docs/guide/creating-a-component.md).
 4. Restart the dev server after changing `package.json`, since resolution failures are cached.
 
 ## `npm` commands fail with `EBADDEVENGINES`

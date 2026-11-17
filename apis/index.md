@@ -1,12 +1,12 @@
-> For AI agents: the complete documentation index is available at /lynx-kit/llms.txt, the full documentation bundle is available at /lynx-kit/llms-full.txt.
+> For AI agents: the complete documentation index is available at /docs/llms.txt, the full documentation bundle is available at /docs/llms-full.txt.
 
 # API overview
 
 ## Components
 
-| Package           | Component                        | Description                                                                                     |
-| ----------------- | -------------------------------- | ----------------------------------------------------------------------------------------------- |
-| `@lynx-kit/modal` | [Modal](/lynx-kit/apis/modal.md) | A customizable, animated modal dialog with title, description, icon, custom content and actions |
+| Package           | Component                    | Description                                                                                     |
+| ----------------- | ---------------------------- | ----------------------------------------------------------------------------------------------- |
+| `@lynx-kit/modal` | [Modal](/docs/apis/modal.md) | A customizable, animated modal dialog with title, description, icon, custom content and actions |
 
 ## Conventions
 

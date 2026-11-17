@@ -1,4 +1,4 @@
-> For AI agents: the complete documentation index is available at /lynx-kit/llms.txt, the full documentation bundle is available at /lynx-kit/llms-full.txt.
+> For AI agents: the complete documentation index is available at /docs/llms.txt, the full documentation bundle is available at /docs/llms-full.txt.
 
 # Creating a component
 
@@ -301,4 +301,4 @@ Start with the template's `Counter` to prove that the wiring works, then swap th
 - **Design tokens.** A shared `@lynx-kit/tailwind-preset` can hold brand colors and radii once there
   is more than one component.
 
-Next, learn how to [publish to npm](/lynx-kit/guide/publishing.md).
+Next, learn how to [publish to npm](/docs/guide/publishing.md).

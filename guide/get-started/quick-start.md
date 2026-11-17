@@ -1,4 +1,4 @@
-> For AI agents: the complete documentation index is available at /lynx-kit/llms.txt, the full documentation bundle is available at /lynx-kit/llms-full.txt.
+> For AI agents: the complete documentation index is available at /docs/llms.txt, the full documentation bundle is available at /docs/llms-full.txt.
 
 # Quick start
 
@@ -6,7 +6,7 @@ Show your first modal in a few minutes.
 
 
 ### Install and configure
-Follow [Installation](/lynx-kit/guide/get-started/installation.md) to add `@lynx-kit/modal` and the
+Follow [Installation](/docs/guide/get-started/installation.md) to add `@lynx-kit/modal` and the
 `source.include` entry.
 ### Add the modal to a page
 Keep the open state in your component and render `<Modal>` at the root of the page:
@@ -61,6 +61,6 @@ Scan the QR code with Lynx Explorer and tap the button.
 - **Render at the page root.** Lynx has no portals, so the overlay covers whichever view it is
   rendered in. Place `<Modal>` near the top of your page component.
 - **Layout.** A Lynx `view` uses a linear layout by default, so set `display: 'flex'` when you
-  want `align-items` to apply. See [Troubleshooting](/lynx-kit/guide/troubleshooting.md).
+  want `align-items` to apply. See [Troubleshooting](/docs/guide/troubleshooting.md).
 
-Next, read the full [Modal API](/lynx-kit/apis/modal.md).
+Next, read the full [Modal API](/docs/apis/modal.md).

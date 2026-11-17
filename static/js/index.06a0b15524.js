@@ -821,7 +821,7 @@ __webpack_require__.d(__webpack_exports__, {
 },
 "H"(__unused_rspack_module, __webpack_exports__) {
 /* export default */ __webpack_exports__.A = ({
-    "base": "/lynx-kit/",
+    "base": "/docs/",
     "siteOrigin": "",
     "title": "Lynx Kit",
     "description": "Lynx Kit is a set of customizable UI components for Lynx apps, styled with Tailwind.",
@@ -919,8 +919,8 @@ __webpack_require__.d(__webpack_exports__, {
     "lang": "en",
     "locales": [],
     "logo": {
-        "light": "/lynx-kit/logo-light.svg",
-        "dark": "/lynx-kit/logo-dark.svg"
+        "light": "/docs/logo-light.svg",
+        "dark": "/docs/logo-dark.svg"
     },
     "logoText": "Lynx Kit",
     "logoHref": "",
@@ -1603,7 +1603,7 @@ __webpack_require__.O = (result, chunkIds, fn, priority) => {
 })();
 // webpack/runtime/public_path
 (() => {
-__webpack_require__.p = "/lynx-kit/";
+__webpack_require__.p = "/docs/";
 })();
 // webpack/runtime/jsonp_chunk_loading
 (() => {
